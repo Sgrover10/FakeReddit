@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Success!</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body id="dashboard">
+    <div class="navbar">
+        <h3>Fake Reddit</h3>
+        <p>Welcome {{user.first_name}}</p>
+        <a href="/logout">Log Out</a>
+    </div>
+
+    <div class="create">
+        <h4>Create a post</h4>
+
+        <form action="/posts/message" method="post">
+            {% csrf_token %}
+            <p>Subject:<input type="text" name="subject"></p>
+            Content:<textarea name="content"cols="30" rows="10"></textarea>
+            <input type="submit" value="Create a post">
+        </form>
+    </div>
+
+    <div class="feed">
+        {% for post in all_posts %}
+        <div class="posts">
+            <p>{{post.subject}}</p>
+            <p>{{post.content}}</p>
+            <p>Posted By: <a href="/user/{{post.poster.id}}">{{post.poster.first_name}} {{post.poster.last_name}}</a> - {{post.created_at}}</p>
+            <p>{{post.likes.count}} Likes</p>
+            {% if post.poster.id == request.session.user_id %}
+                <a href="/posts/{{post.id}}/edit_mess">Edit </a>
+                <a href="/posts/{{post.id}}/delete">Delete</a>
+            {% else %}
+                {% if user not in post.likes.all %}
+                    <form action="/posts/{{post.id}}/like" method="post">
+                        {% csrf_token %}
+                        <input type="submit" name="add_like" Value="Like">
+                    </form>
+                {% else %}
+                    <form action="/posts/{{post.id}}/unlike" method="post">
+                        {% csrf_token %}
+                        <input type="submit" name="remove_like" Value="Unlike">
+                    </form>
+                {% endif %}
+            {% endif %}
+            {% for comment in post.comments.all %}
+            <ul>
+                <li><p>{{comment.content}}</p></li>
+                    <p>Posted By: <a href="/user/{{comment.poster.id}}">{{comment.poster.first_name}} {{comment.poster.last_name}}</a> - {{comment.created_at}}
+                        {% if request.session.user_id == comment.poster.id %}
+                            <a href="/posts/{{comment.id}}/edit_comm">Edit </a>
+                            <a href="/posts/{{comment.id}}/delete_comm">Delete</a>
+                        {% endif %}
+                    </p>
+            </ul>
+            {% endfor %}
+        </div>
+        <div class="create">
+            <h5>Post a comment:</h5>
+            <form action="/posts/comment/{{post.id}}" method="post"class="add_comm">
+                {% csrf_token %}
+                <textarea name="content" cols="40" rows= "5"></textarea>
+                <input type="hidden"name="post" value="{{post.id}}">
+                <input type="submit" value="Post a comment">
+            </form>
+        </div>
+    {% endfor %}
+    </div>
+
+</body>
+</html>

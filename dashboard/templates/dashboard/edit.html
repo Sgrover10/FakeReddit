@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Post</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <h1>Edit post:</h1>
+    <form action="/posts/{{edit_post.id}}/edit_mess" method="post">
+        {% csrf_token %}
+        Subject: <input type="text" name="subject" Value="{{edit_post.subject}}">
+        <br>
+        Content:<input type="textarea" name="content" Value="{{edit_post.content}}"></input>
+        <br>
+        <input type="submit"value="Confirm Message Edit">
+    </form>
+    <br><br>
+    <form action="/posts/{{edit_comm.id}}/edit_comm" method="post">
+        {% csrf_token %}
+        <textarea name="content" Value="{{edit_comm.content}}"></textarea>
+        <br>
+        <input type="submit"value="Confirm Comment Edit">
+    </form>
+</body>
+</html>

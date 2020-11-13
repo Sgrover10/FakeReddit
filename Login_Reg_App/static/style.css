@@ -1,0 +1,83 @@
+*{
+    font-family: sans-serif;
+    color: rgb(0, 0, 0);
+}
+.container{
+    width: 1000px;
+    margin: 0px auto;
+    background-color: rgb(214, 245, 224);
+}
+#home .heading{
+    background-color:rgb(214, 245, 224);
+    height: 100px;
+    padding: 15px;
+}
+/* .users {
+
+} */
+
+.feed{
+    width: 900px;
+    display: inline-block;
+    border: 2px black solid;
+    vertical-align: top;
+    padding: 5px;
+    margin: 25px 20px;
+    background-color: white;
+}
+
+.reg, .log{
+    width: 350px;
+    display: inline-block;
+    border: 2px black solid;
+    vertical-align: top;
+    padding: 5px;
+    margin: 25px 23px;
+    background-color: white;
+}
+
+.create, .posts{
+    width: 350px;
+    display: inline-block;
+    border: 2px black solid;
+    vertical-align: top;
+    padding: 5px;
+    margin: 25px 23px;
+    background-color: white;
+}
+
+
+/* .posts{
+    width: 855px;
+    display: inline-block;
+    border: 2px black solid;
+    vertical-align: top;
+    padding: 5px;
+    margin: 25px 20px;
+    background-color: white; */
+/* } */
+
+
+
+.create form{
+    border: black solid 2px;
+    padding: 8px;
+    background-color:rgb(214, 245, 224) ;
+}
+
+form input{
+    display: inline-block;
+
+}
+.add_comm{
+    display: inline-block;
+
+}
+
+h1, a{
+    text-align: center;
+    text-decoration: underline;
+}
+ul{
+    margin-bottom: 10px;
+}
